@@ -1,0 +1,20 @@
+
+const MSG_TYPE = {
+  QUESTION: 0,
+  ANSWER: 1,
+  SPLIT: 9
+}
+
+const STATUS_TYPE = {
+  UNRESOLVED: 0,
+  RESOLVED: 1,
+  TODO: 2,
+  MARKED: 3,
+  LIFETIME: 4,
+  NOT_RESOLVE: 9
+}
+
+export {
+  MSG_TYPE,
+  STATUS_TYPE
+}
