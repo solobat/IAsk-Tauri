@@ -68,7 +68,7 @@ function onAddOk() {
       .save(
         {
           content,
-          sid: curSid,
+          sid: curSid.value,
           createTime: Number(new Date()),
           updateTime: Number(new Date()),
         },

@@ -22,11 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ACTIONS,
-  bindKey,
-  keyboardConfigs,
-} from "../../helpers/keyboard.helper";
+import { keyboardConfigs } from "../../helpers/keyboard.helper";
 import { useAppStore } from "../../store";
 import { computed } from "@vue/reactivity";
 
