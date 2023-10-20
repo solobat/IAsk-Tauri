@@ -51,9 +51,13 @@ export function exportToJsonString(
 export function importFromJsonString(
   idbDatabase: any,
   jsonString: string,
-  cb: any
+  cb: any,
+  options?: {
+    handleData?: (data: any) => any;
+  }
 ) {
   const objectStoreNamesSet = new Set(idbDatabase.objectStoreNames);
+  const { handleData = (data: any) => data } = options || {};
   const size = objectStoreNamesSet.size;
   if (size === 0) {
     cb(null);
@@ -62,7 +66,7 @@ export function importFromJsonString(
     const transaction = idbDatabase.transaction(objectStoreNames, "readwrite");
     transaction.onerror = (event: any) => cb(event);
 
-    const importObject = JSON.parse(jsonString);
+    const importObject = handleData(JSON.parse(jsonString));
 
     // Delete keys present in JSON that are not present in database
     Object.keys(importObject).forEach((storeName) => {
@@ -95,7 +99,7 @@ export function importFromJsonString(
                 cb(null);
               }
             }
-          }
+          };
           request.onerror = (event: any) => {
             console.log(event);
           };

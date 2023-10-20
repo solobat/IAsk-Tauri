@@ -110,13 +110,28 @@ function formatJSON(json: any) {
 export async function importDBFile(json: string) {
   return new Promise((resolve) => {
     clearDatabase(db.backendDB(), () => {
-      importFromJsonString(db.backendDB(), json, (err: any) => {
-        if (!err) {
-          resolve(true);
-        } else {
-          reject(err);
+      importFromJsonString(
+        db.backendDB(),
+        json,
+        (err: any) => {
+          if (!err) {
+            resolve(true);
+          } else {
+            reject(err);
+          }
+        },
+        {
+          handleData(res) {
+            const data: any[] = res.data.data;
+
+            return data.reduce((memo, item) => {
+              memo[item.tableName] = item.rows;
+
+              return memo;
+            }, {} as Record<string, any>);
+          },
         }
-      });
+      );
     });
   });
 }
