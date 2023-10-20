@@ -41,7 +41,7 @@
           </template>
           <div
             v-html="item.html"
-            @click.meta="onEditClick(item, index)"
+            @click.meta.stop.prevent="onEditClick(item, index)"
             :style="{ 'user-select': item.onedit ? 'none' : 'initial' }"
           ></div>
         </a-popover>
