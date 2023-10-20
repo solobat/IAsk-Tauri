@@ -2,8 +2,8 @@
   <div class="qlist-wrap">
     <div
       class="qitem-wrap"
-      v-for="(item, index) in filterredQuestions"
-      :key="index"
+      v-for="item in filterredQuestions"
+      :key="item.id"
       :class="{
         'is-active': item.id === curQid,
         'is-sticky': item.sticky == 1,
@@ -51,7 +51,11 @@
         <PushpinOutlined class="icon-pin" v-if="item.sticky == 1" />
       </a-popover>
     </div>
-    <a-modal v-model:value="renameModalVisible" title="编辑名称" @ok="onQnameEditOk">
+    <a-modal
+      v-model:value="renameModalVisible"
+      title="编辑名称"
+      @ok="onQnameEditOk"
+    >
       <a-input v-model:value="curQForm.name" @pressEnter="onQnameEditOk" />
     </a-modal>
     <a-empty style="margin-top: 10px" v-if="!filterredQuestions.length" />
@@ -228,7 +232,7 @@ async function stickyQuestion(item: QuestionModel) {
 .qitem-wrap {
   padding-left: 15px;
   background: #fff;
-  user-select: none;
+  -webkit-user-select: none;
 
   &:hover {
     background: #f6f6f7;
@@ -276,7 +280,7 @@ async function stickyQuestion(item: QuestionModel) {
     cursor: pointer;
 
     &:hover {
-      color: #fff;
+      color: #fff !important;
       background: $color-primary;
     }
   }
