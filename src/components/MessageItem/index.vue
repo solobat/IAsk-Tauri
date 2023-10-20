@@ -3,6 +3,7 @@
     class="aitem-wrap"
     ref="el"
     :key="`${item.id}_wrap`"
+    :data-id="item.id"
     v-if="item.type !== MSG_TYPE.QUESTION ? !item.shouldHide : true"
     :class="[`${getMsgCls(item.type)}`, { 'is-editing': inEditing }]"
   >

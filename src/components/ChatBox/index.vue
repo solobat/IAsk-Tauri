@@ -41,6 +41,7 @@
       @refreshItem="onRefreshItem"
       @foldUpdate="updateFold"
       @load-more="loadMore"
+      @item-update="onItemUpdate"
     />
     <Editor
       :content="newAnswerText"
@@ -502,6 +503,21 @@ function updateFold(item: EditableAnswer, newFolded?: boolean) {
 
 function loadMore() {
   showLatestOnePage(filterredAnswers.value);
+}
+
+function onItemUpdate(item: EditableAnswer) {
+  const { id, content } = item;
+
+  answerController
+    .update({
+      id,
+      content,
+    })
+    .then(() => {
+      loadAnswers();
+      message.success("更新成功");
+    });
+  store.commit("SET_SHOULD_SYNC", true);
 }
 
 function onSortOk(list: EditableAnswer[]) {

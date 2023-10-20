@@ -31,6 +31,7 @@
 import { MSG_TYPE } from "../../enum";
 import MessageTime from "../MessageTime/index.vue";
 import MessageItem from "../MessageItem/index.vue";
+import $ from "jquery";
 import {
   computed,
   defineProps,
@@ -51,6 +52,7 @@ const emit = defineEmits<{
   (event: "deleteItem", item: EditableAnswer): void;
   (event: "foldUpdate", item: EditableAnswer, flag?: boolean): void;
   (event: "loadMore"): void;
+  (event: "itemUpdate", item: EditableAnswer): void;
 }>();
 const props = defineProps({
   list: {
@@ -90,17 +92,49 @@ function handleScroll(event: Event) {
   }
 }
 
+function handleBoxClick(event: Event) {
+  const elem = event.target as HTMLElement;
+  if (elem && elem.tagName === "INPUT" && elem.id != null) {
+    const $box = $(elem).closest(".aitem-wrap");
+    const index = Array.from($box.find('input[type="checkbox"]')).findIndex(
+      (el) => el.id === elem.id
+    );
+    const aid = $box.data("id");
+
+    handleItemCheckboxClick(aid, index, (elem as HTMLInputElement).checked);
+  }
+}
+
 onMounted(() => {
   const el = answers.value;
   if (el) {
     el.addEventListener("scroll", handleScroll);
+    el.addEventListener("click", handleBoxClick);
   }
 });
+
+function handleItemCheckboxClick(aid: number, index: number, checked: boolean) {
+  const item = props.list.find((item) => item.id === aid);
+  if (item) {
+    const markdownText = item.content.trim();
+    const lines = markdownText.split("\n");
+    const line = lines[index];
+    const updatedLine = line.replace(/\[.\]/, checked ? "[x]" : "[ ]");
+    lines.splice(index, 1, updatedLine);
+
+    item.content = lines.join("\n");
+
+    emit("itemUpdate", item);
+    // NOTE: 在当前 tick 冻结，在下个 tick 自动解冻
+    scrollDisabled.value = true;
+  }
+}
 
 onUnmounted(() => {
   const el = answers.value;
   if (el) {
     el.removeEventListener("scroll", handleScroll);
+    el.removeEventListener("click", handleBoxClick);
   }
 });
 
