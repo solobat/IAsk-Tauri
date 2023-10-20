@@ -13,7 +13,7 @@
       class="ipt"
       :editable="!isFold"
       @imgAdd="onImgAdd"
-      @keydown.native.meta.enter.exact="onMetaEnterDown"
+      @keydown.native.shift.enter.exact="onShiftEnterDown"
       @keydown.native.enter.exact="onEnterDown"
       @keydown.native.esc="onEscDown"
     >
@@ -26,10 +26,10 @@
     </mavon-editor>
     <div class="bottom-bar">
       <div class="key-tips">
-        <span v-if="sendMessage === 'commandReturn'"
-          >↩换行 / ⌘+↩{{ btnText }}</span
+        <span v-if="sendMessage === 'shiftReturn'"
+          >↩换行 / ⇧+↩{{ btnText }}</span
         >
-        <span v-else>↩{{ btnText }} / ⌘+↩换行</span>
+        <span v-else>↩{{ btnText }} / ⇧+↩换行</span>
       </div>
       <a-button
         v-if="type === 'edit'"
@@ -144,8 +144,8 @@ function onEnterDown(event: any) {
   }
 }
 
-function onMetaEnterDown() {
-  if (sendMessage.value === "commandReturn") {
+function onShiftEnterDown() {
+  if (sendMessage.value === "shiftReturn") {
     onSendClick();
   }
 }

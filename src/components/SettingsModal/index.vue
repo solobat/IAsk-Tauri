@@ -31,8 +31,8 @@
               @change="saveConfigKey($event, 'shortcuts', 'sendMessage')"
             >
               <a-select-option key="1" value="return">Return</a-select-option>
-              <a-select-option key="2" value="commandReturn"
-                >Command+Return</a-select-option
+              <a-select-option key="2" value="shiftReturn"
+                >Shift+Return</a-select-option
               >
             </a-select>
           </a-form-item>
