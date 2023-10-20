@@ -13,7 +13,7 @@ marked.setOptions({
 
 marked.use({ renderer: TaskRender });
 
-const cache = new LRUCache({
+const cache = new LRUCache<string, string>({
   max: 500,
 });
 export function parseMarkdown(content = "") {

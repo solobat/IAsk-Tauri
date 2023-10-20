@@ -17,4 +17,5 @@ export type EditableAnswer = AnswerModel & {
   html?: string;
   folded?: boolean;
   onedit?: boolean;
+  willShow?: boolean;
 };

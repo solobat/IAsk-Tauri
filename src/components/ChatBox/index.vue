@@ -34,11 +34,13 @@
     <MessageList
       :editingMsg="editingMsg"
       :list="filterredAnswers"
+      :loading="loading"
       ref="list"
       @deleteItem="onDeleteItem"
       @toggleItemType="onToggleItemType"
       @refreshItem="onRefreshItem"
       @foldUpdate="updateFold"
+      @load-more="loadMore"
     />
     <Editor
       :content="newAnswerText"
@@ -108,14 +110,12 @@ const listData: {
 const keyword = ref("");
 const allFolded = ref(false);
 const currentQuestion = computed(() => store.getters.currentQuestion);
-watch(currentQuestion, () => {
-  console.log("currentQuestion", currentQuestion);
-});
 const qaddVisible = computed(() => store.state.Note.qaddVisible);
 const curQid = computed(() => store.state.Note.curQid);
 const curSid = computed(() => store.state.Note.curSid);
 const newAnswerText = computed(() => store.state.Note.newAnswerText);
 const editingMsg = computed(() => store.state.Note.editingMsg);
+const loading = ref(true);
 const newAnswer = ref<any>(null);
 const list = ref<any>(null);
 const filterredAnswers = computed(() => {
@@ -144,6 +144,8 @@ const filterredAnswers = computed(() => {
       (item) => item.content.indexOf(keyword.value) !== -1
     );
   }
+
+  showLatestOnePage(results, true);
 
   return results as EditableAnswer[];
 });
@@ -307,7 +309,7 @@ function loadAnswers(firstOpen?: boolean) {
     let shouldHide = false;
     const list = res as EditableAnswer[];
 
-    listData.answers = list.map((item, index) => {
+    const items = list.map((item, index) => {
       const { content, id, type: typeVal, status = 0 } = item;
       const folded = firstOpen
         ? allFolded.value ||
@@ -337,7 +339,42 @@ function loadAnswers(firstOpen?: boolean) {
         status,
       };
     });
+    listData.answers = items;
   });
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, ms);
+  });
+}
+
+async function showLatestOnePage(items: EditableAnswer[], reset?: boolean) {
+  loading.value = true;
+
+  if (reset) {
+    items.forEach((item) => (item.willShow = false));
+  }
+
+  let len = items.length;
+  const pageSize = 10;
+  let count = 0;
+
+  while (len-- && count < pageSize) {
+    const item = items[len];
+
+    if (!item.willShow) {
+      item.willShow = true;
+      if (item.type === MSG_TYPE.QUESTION) {
+        count++;
+      }
+    }
+  }
+
+  await wait(500);
+  loading.value = false;
 }
 
 function toggleFoldAllDialogs() {
@@ -461,6 +498,10 @@ function updateFold(item: EditableAnswer, newFolded?: boolean) {
       return;
     }
   }
+}
+
+function loadMore() {
+  showLatestOnePage(filterredAnswers.value);
 }
 
 function onSortOk(list: EditableAnswer[]) {
