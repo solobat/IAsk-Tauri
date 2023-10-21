@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
     name: "Note",
     component: Note,
     beforeEnter(to, from, next) {
-      store.commit("SET_AID", to.query.aid);
+      store.commit("SET_AID", Number(to.query.aid));
       next();
     },
   },

@@ -202,7 +202,7 @@ function onRefreshClick() {
 
 function onChangeStatusClick(
   item: EditableAnswer,
-  newStatusItem: typeof options.status[number]
+  newStatusItem: (typeof options.status)[number]
 ) {
   const { id } = item;
   const newStatus = newStatusItem.value;
@@ -243,7 +243,7 @@ function updateFold(item: EditableAnswer) {
 function hideMenu() {}
 
 function scrollToAnswer() {
-  router.replace({ query: {} })
+  router.replace({ query: {} });
   store.commit("SET_AID", 0);
   nextTick(() => {
     if (el.value) {
@@ -253,7 +253,9 @@ function scrollToAnswer() {
 }
 
 onMounted(() => {
-  scrollToAnswer();
+  if (aid.value === props.item.id) {
+    scrollToAnswer();
+  }
 });
 </script>
 
