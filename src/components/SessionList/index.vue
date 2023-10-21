@@ -52,9 +52,10 @@
       </a-popover>
     </div>
     <a-modal
-      v-model:value="renameModalVisible"
+      :visible="renameModalVisible"
       title="编辑名称"
       @ok="onQnameEditOk"
+      @cancel="renameModalVisible = false"
     >
       <a-input v-model:value="curQForm.name" @pressEnter="onQnameEditOk" />
     </a-modal>
