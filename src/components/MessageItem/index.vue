@@ -25,15 +25,22 @@
               <a-menu class="q-options-menu">
                 <a-menu-item
                   class="q-option"
+                  key="convert"
                   @click="onAnswerSwitchClick(item)"
                   >{{
                     item.type === MSG_TYPE.QUESTION ? "转为回答" : "转为问题"
                   }}</a-menu-item
                 >
-                <a-menu-item class="q-option" @click="onEditClick(item, index)"
+                <a-menu-item
+                  class="q-option"
+                  @click="onEditClick(item, index)"
+                  key="edit"
                   >编辑</a-menu-item
                 >
-                <a-menu-item class="q-option" @click="onAnswerDeleteClick(item)"
+                <a-menu-item
+                  class="q-option"
+                  @click="onAnswerDeleteClick(item)"
+                  key="del"
                   >删除</a-menu-item
                 >
               </a-menu>
@@ -74,15 +81,22 @@
                 <a-menu-item
                   class="q-option"
                   v-if="currentQuestion.sid !== CONST.DB.TEMPLATE_SID"
+                  key="convert"
                   @click="onAnswerSwitchClick(item)"
                   >{{
                     item.type === MSG_TYPE.QUESTION ? "转为回答" : "转为问题"
                   }}</a-menu-item
                 >
-                <a-menu-item class="q-option" @click="onRefreshClick"
+                <a-menu-item
+                  class="q-option"
+                  @click="onRefreshClick"
+                  key="refresh"
                   >刷新对话</a-menu-item
                 >
-                <a-menu-item class="q-option" @click="onEditClick(item, index)"
+                <a-menu-item
+                  class="q-option"
+                  @click="onEditClick(item, index)"
+                  key="edit"
                   >编辑</a-menu-item
                 >
                 <a-sub-menu
@@ -101,7 +115,10 @@
                     >{{ status.label }}</a-menu-item
                   >
                 </a-sub-menu>
-                <a-menu-item class="q-option" @click="onAnswerDeleteClick(item)"
+                <a-menu-item
+                  class="q-option"
+                  @click="onAnswerDeleteClick(item)"
+                  key="del"
                   >删除</a-menu-item
                 >
               </a-menu>

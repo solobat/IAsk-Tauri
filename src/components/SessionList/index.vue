@@ -19,10 +19,16 @@
         <template #content>
           <div class="q-options">
             <a-menu class="q-options-menu">
-              <a-menu-item @click="stickyQuestion(item)" class="q-option">{{
-                item.sticky ? "取消置顶" : "置顶"
-              }}</a-menu-item>
-              <a-menu-item @click="onRenameClick(item)" class="q-option"
+              <a-menu-item
+                @click="stickyQuestion(item)"
+                class="q-option"
+                key="sticky"
+                >{{ item.sticky ? "取消置顶" : "置顶" }}</a-menu-item
+              >
+              <a-menu-item
+                @click="onRenameClick(item)"
+                class="q-option"
+                key="rename"
                 >重命名</a-menu-item
               >
               <a-sub-menu
@@ -39,7 +45,10 @@
                   >{{ sitem.name }}</a-menu-item
                 >
               </a-sub-menu>
-              <a-menu-item @click="archiveQuestion(item)" class="q-option"
+              <a-menu-item
+                key="archive"
+                @click="archiveQuestion(item)"
+                class="q-option"
                 >归档</a-menu-item
               >
             </a-menu>
