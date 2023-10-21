@@ -256,7 +256,7 @@ function editMsg(content: string) {
     })
     .then(() => {
       // NOTE: 编辑时不滚动
-      list.value!.scrollDisabled = true;
+      emitter.emit("editMsg");
       const index = listData.answers.findIndex((item) => item.id === id);
       listData.answers.splice(index, 1, {
         ...editingMsg.value!,

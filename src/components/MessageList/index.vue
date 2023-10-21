@@ -45,6 +45,7 @@ import {
 import { EditableAnswer } from "../../server/model/Answer";
 import { useAppStore } from "../../store";
 import { event } from "@tauri-apps/api";
+import { emitter } from "../../helpers/emitter.helper";
 
 const emit = defineEmits<{
   (event: "toggleItemType", item: EditableAnswer): void;
@@ -111,6 +112,10 @@ onMounted(() => {
     el.addEventListener("scroll", handleScroll);
     el.addEventListener("click", handleBoxClick);
   }
+
+  emitter.on("editMsg", () => {
+    scrollDisabled.value = true;
+  });
 });
 
 function handleItemCheckboxClick(aid: number, index: number, checked: boolean) {
