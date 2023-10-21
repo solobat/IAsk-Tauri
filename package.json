@@ -30,7 +30,7 @@
     "lru-cache": "^10.0.1",
     "marked": "^9.1.2",
     "marked-highlight": "^2.0.6",
-    "mavon-editor": "3.0.0-beta",
+    "mavon-editor": "3.0.1",
     "mitt": "^3.0.0",
     "qiniu-js": "^3.4.1",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store",
