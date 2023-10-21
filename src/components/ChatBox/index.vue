@@ -558,6 +558,7 @@ function onSortCancel() {
     font-weight: bold;
     font-size: 16px;
     user-select: none;
+    cursor: pointer;
   }
 
   .chatbox-tools {
