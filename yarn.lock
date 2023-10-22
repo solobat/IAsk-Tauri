@@ -193,6 +193,11 @@
   dependencies:
     "@types/sizzle" "*"
 
+"@types/katex@^0.16.3":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@types/katex/-/katex-0.16.5.tgz#76adc073ce58e860cb8c34b5673e1aea9a0172b0"
+  integrity sha512-DD2Y3xMlTQvAnN6d8803xdgnOeYZ+HwMglb7/9YCf49J9RkJL53azf9qKa40MkEYhqVwxZ1GS2+VlShnz4Z1Bw==
+
 "@types/lodash@^4.14.189":
   version "4.14.189"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.189.tgz#975ff8c38da5ae58b751127b19ad5e44b5b7f6d2"
@@ -507,6 +512,11 @@ commander@^2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
+
+commander@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
+  integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
 compute-scroll-into-view@^1.0.17:
   version "1.0.17"
@@ -876,6 +886,13 @@ jquery@^3.7.1:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
+katex@^0.16.9:
+  version "0.16.9"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.9.tgz#bc62d8f7abfea6e181250f85a56e4ef292dcb1fa"
+  integrity sha512-fsSYjWS0EEOwvy81j3vRA8TEAhQhKiqO+FQaKWp0m39qwOzHVBgAUBIXWj1pB+O2W3fIpNa6Y9KSKCVbfPhyAQ==
+  dependencies:
+    commander "^8.3.0"
+
 layerr@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/layerr/-/layerr-0.1.2.tgz#16c8e7fb042d3595ab15492bdad088f31d7afd15"
@@ -926,6 +943,14 @@ marked-highlight@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/marked-highlight/-/marked-highlight-2.0.6.tgz#9992eda94156ac14e1322f70ab921b6bd0d680d6"
   integrity sha512-xjA/C6xgXAfkkYg+YHnxdjmgFyTDtqqu8KbZiqh+COJ7PuzR15kqa+rPrs6pf/2jExXtG1jyCFUHmv9s0Bi/dQ==
+
+marked-katex-extension@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/marked-katex-extension/-/marked-katex-extension-4.0.2.tgz#01b4896bb830258705fc7bc704f53e4ac270e2b8"
+  integrity sha512-kko8nI7I3d1O2M9yue0GdIZCo8au7j+6K97F2gul7VKOVfRPAGsjvAA7xZZLS8H5WO9Mnmf8/cf590ylbLIo7g==
+  dependencies:
+    "@types/katex" "^0.16.3"
+    katex "^0.16.9"
 
 marked@^9.1.2:
   version "9.1.2"

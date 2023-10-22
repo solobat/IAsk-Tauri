@@ -3,6 +3,7 @@ import { markedHighlight } from "marked-highlight";
 import hljs from "./highlight.helper";
 import TaskRender from "../extensions/marked.task";
 import { LRUCache } from "lru-cache";
+import markedKatex from "marked-katex-extension";
 
 const marked = new Marked(
   markedHighlight({
@@ -14,7 +15,13 @@ const marked = new Marked(
     async: false,
   })
 );
+
 marked.use({ renderer: TaskRender });
+marked.use(
+  markedKatex({
+    throwOnError: false,
+  })
+);
 
 const cache = new LRUCache<string, string>({
   max: 500,
